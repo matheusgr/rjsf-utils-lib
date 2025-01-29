@@ -133,10 +133,12 @@ export function calculateIndexScore<
               )
             );
           }
-          if (
+
+          // avoid null type. doesn't matter to match undefined
+          if (guessType(formValue) !== 'null' && (
             value.type === guessType(formValue) ||
             (Array.isArray(value.type) &&
-              value.type.includes(guessType(formValue)))
+              value.type.includes(guessType(formValue))))
           ) {
             // If the types match, then we bump the score by one
             let newScore = score + 1;
